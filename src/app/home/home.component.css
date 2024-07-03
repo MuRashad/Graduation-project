@@ -1,0 +1,313 @@
+#home {
+  position: relative;
+  height: 100vh;
+}
+
+.carousel-item {
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+  max-height: 100vh;
+}
+.foot{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.hambozo{
+  display: flex;
+  justify-content: center;
+}
+.signup-layer {
+  background-image: url('../../assets/images/Layer 4.png');
+  background-position: center;
+  background-size: 100%;
+}
+
+.image-handle{
+  transform: translateY(-50%);
+}
+.active.carousel-item-start, .carousel-item-prev:not(.carousel-item-end) {
+    transform: translateX(100%);
+}
+.home-info {
+  margin-bottom: 20px;
+}
+
+.btn a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.carousel-inner.fixed-height {
+  height: 500px; /* Set a fixed height for the carousel container */
+}
+.carousel-inner {
+  height: 500px; /* Set a fixed height for the carousel container */
+
+}
+
+.carousel-item img {
+  height: 100%;
+  object-fit: cover; /* Ensure images cover the container while maintaining aspect ratio */
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.carousel-indicators .active {
+  background-color: #000;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none;
+}
+
+/* new part css */
+
+
+  /* #Home{
+      /* background-image: url(../Images/hero-bg.jpg); 
+      width: 100%;
+    
+      background-position: center;
+      background-size: cover;
+  } */
+  .dark-opacity{
+  background-color: rgba(0, 0, 0, 0.9);
+  
+  }
+  .about-image{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Dr-image{
+     width: 90%;
+     max-height: 50%;
+   }
+  .Dr-image .image-border{
+    border-width: 8px;
+    border-color:var(--main-color);
+    border-radius: 6px;
+    border-style: solid;
+  }
+  .Dr-image  .image-border .img img{
+    width: 100%;
+  }
+  .Dr-image  .image-border .img{
+    position: relative;
+    top:15px ;
+    left:15px ;
+  
+  }
+  .Dr-image  .image-border .img .about-layer{
+   background-color: rgba(12, 12, 12, 0.516);
+   position: absolute;
+   top:100%;
+   left:0%;
+   right:0% ;
+   bottom:0% ; 
+   overflow: hidden;
+   /*  opacity: 0;*/ 
+   transition: top 1s  ;
+  }
+   .Dr-image .image-border .img:hover .about-layer
+   {
+          top:0% ;
+  }
+
+  .clss1{
+    padding-right:30px;
+  }
+  .clss2{
+    padding-left:10px;
+    width:20px ;
+    padding-top:10px ;
+  }
+  .about-layer .inner{
+   position: absolute;
+   width:100% ;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   top: 80%;
+  }
+
+  .service-box{
+      text-align: center;
+      padding:10px 10px;
+      background-color:rgb(236, 254, 250) ;
+      border-radius: 10px;
+      margin-bottom: 20px; /* Space between boxes */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+  }
+  .service-circle{
+      color:#1e1e1e ;
+  }
+  .icon-shape{
+  width: 120px;
+  height: 120px;
+  margin:0 auto;
+  font-size: 13px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 0px 10px var(--main-color) ;
+  transition: all 500ms ease;
+  }
+  
+  .service-box:hover .icon-shape{
+      box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.097);
+      background-color: var(--main-color) ;
+      color: #fff;
+      transform: translateY(-5px);  
+  }
+  .rate{
+      position: relative;
+      width: 100%;
+      height: 50vh;
+      background-image:url("../../assets/images/arrangement-medical-objects-with-empty-frame.jpg") ;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      background-position: center;
+  }
+  .rate .rate-component{
+      width: 100%;
+      height: 50vh;
+      position: absolute;
+      background-color: rgb(12 138 126 / 31%);
+  }
+  .rate-item .rate-icon{
+      background-color: var(--main-color);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: auto;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+      box-shadow:0px 0px 0px 10px #00000028 ;
+      
+  }
+  #person{
+    padding: 100px 100px !important
+  }
+  #carouselBoxContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000d0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slider-icons {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    color: #fff;
+    height: 100%;
+    text-align: center;
+  }
+  
+  .slider-icons #btnClose {
+    position: absolute;
+    top: 1%;
+    left: 97%;
+  }
+  
+  .slider-icons .arrow {
+    margin: 0 20px;
+    width: 25px;
+    height: 35px;
+    background-color: black;
+    border-radius: 4px;
+  }
+  
+  .carousel-image {
+    position: relative;
+    width: 60%;
+    height: 600px;
+  }
+  
+  .bg-image {
+    position: fixed;
+  }
+  
+  .sec-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100% 100%;
+  }
+  
+  .carousel-layer {
+    width: 100%;
+    background-color: #09c;
+  }
+  
+  
+  .fixed-image {
+    position: relative;
+    background-image: url("../../assets/images/flat-lay-minimal-medicinal-pills-assortment.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 70vh;
+  }
+  
+  .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(0, 0, 0, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+
+  }
+  .tran-layer{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+  .carousel-indicators {
+    bottom: -20%;
+  }
+  
+.morgan-image{
+    width: 30px;
+    border-radius: 50%;
+}
+.contact-content{
+  background-color: var(--main-color);
+  border-top-left-radius:50px ;
+  border-bottom-right-radius:50px ;
+} 

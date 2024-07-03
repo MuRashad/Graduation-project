@@ -1,0 +1,92 @@
+<div class="container-fluid">
+  <div class="signup-layer">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="signup-info d-flex flex-column align-items-center justify-content-center">
+          <div class="signup-photo">
+            <img src="../../assets/images/circle.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <ng-container *ngIf="selectedForm === null && !userClicked">
+          <div class="card clickable-box mt-5" (click)="chooseForm('user'); userClicked = true">
+            <div class="card-body d-flex align-items-center justify-content-center">
+              <i class="fas fa-user fa-3x me-3"></i> <!-- User icon -->
+              <div>
+                <h5 class="card-title">User</h5>
+                <p class="card-text">Click here to register as a user</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="selectedForm === null && !pharmacyClicked">
+          <div class="card clickable-box mt-2" (click)="chooseForm('pharmacy'); pharmacyClicked = true">
+            <div class="card-body d-flex align-items-center justify-content-center">
+              <i class="fas fa-hospital fa-3x me-3"></i>
+              <div>
+                <h5 class="card-title">Pharmacy</h5>
+                <p class="card-text">Click here to register as a pharmacy</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="col-md-6 mt-2 d-flex align-items-center">
+        <div class="w-75 p-5 ms-auto">
+          <form *ngIf="selectedForm === 'pharmacy'" (ngSubmit)="handleLogin()" [formGroup]="pharmacyLoginForm"
+            class="form-design p-3 border-1 rounded-start-5 py-5">
+            <h3 class="text-center text-white">Pharmacy Sign in</h3>
+            <label for="pharmacy_username">Name:</label>
+            <input formControlName="pharmacy_username" class="form-control mb-1" type="text" placeholder="First name and last name" id="pharmacy_username">
+            <div class="alert alert-danger p-1 mb-0" *ngIf="pharmacyLoginForm.get('pharmacy_username')?.errors && pharmacyLoginForm.get('pharmacy_username')?.touched">
+              <p *ngIf="pharmacyLoginForm.get('pharmacy_username')?.errors?.['minlength']" class="m-0">*min length must be 3</p>
+              <p *ngIf="pharmacyLoginForm.get('pharmacy_username')?.errors?.['maxlength']" class="m-0">*max length is 20</p>
+              <p *ngIf="pharmacyLoginForm.get('pharmacy_username')?.errors?.['required']" class="m-0">*name is required</p>
+            </div>
+
+            <label for="pharmacy_password">Password:</label>
+            <input formControlName="pharmacy_password" class="form-control mb-2" type="password" placeholder="Password" id="pharmacy_password">
+            <div class="alert alert-danger p-1 mb-0" *ngIf="pharmacyLoginForm.get('pharmacy_password')?.errors && pharmacyLoginForm.get('pharmacy_password')?.touched">
+              <p *ngIf="pharmacyLoginForm.get('pharmacy_password')?.errors?.['pattern']" class="m-0">*password must start with two letters and be at least 8 characters or numbers </p>
+              <p *ngIf="pharmacyLoginForm.get('pharmacy_password')?.errors?.['required']" class="m-0">*password is required</p>
+            </div>
+            <div class="alert alert-danger" *ngIf="apiError.length > 0 ">
+              {{apiError}}
+            </div>
+            <button [disabled]="pharmacyLoginForm.invalid" class="btn btn-secondary mt-2" type="submit">
+              <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin-pulse"></i>
+              <span *ngIf="!isLoading">submit</span>
+            </button>
+          </form>
+
+          <form *ngIf="selectedForm === 'user'" (ngSubmit)="handleLogin()" [formGroup]="userLoginForm"
+            class="form-design p-3 border-1 rounded-start-5 py-5">
+            <h3 class="text-center text-white">User Sign in</h3>
+            <label for="username">Name:</label>
+            <input formControlName="username" class="form-control mb-1" type="text" placeholder="First name and last name" id="username">
+            <div class="alert alert-danger p-1 mb-0" *ngIf="userLoginForm.get('userame')?.errors && userLoginForm.get('username')?.touched">
+              <p *ngIf="userLoginForm.get('username')?.errors?.['maxlength']" class="m-0">*max length is 20</p>
+              <p *ngIf="userLoginForm.get('username')?.errors?.['required']" class="m-0">*name is required</p>
+              <p *ngIf="userLoginForm.get('username')?.errors?.['minlength']" class="m-0">*min length must be 3</p>
+            </div>
+
+            <label for="password">Password:</label>
+            <input formControlName="password" class="form-control mb-2" type="password" placeholder="Password" id="password">
+            <div class="alert alert-danger p-1 mb-0" *ngIf="userLoginForm.get('password')?.errors && userLoginForm.get('password')?.touched">
+              <p *ngIf="userLoginForm.get('password')?.errors?.['pattern']" class="m-0">*password must start with two letters and be at least 8 characters or numbers </p>
+              <p *ngIf="userLoginForm.get('password')?.errors?.['required']" class="m-0">*password is required</p>
+            </div>
+            <div class="alert alert-danger" *ngIf="apiError.length > 0 ">
+              {{apiError}}
+            </div>
+            <button [disabled]="userLoginForm.invalid" class="btn btn-secondary mt-2" type="submit">
+              <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin-pulse"></i>
+              <span *ngIf="!isLoading">submit</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
