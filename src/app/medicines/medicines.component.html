@@ -25,6 +25,7 @@
     <div class="row">
       <div *ngFor="let medicine of filteredMedicines" class="col-md-4 mb-4">
         <div class="medicine-item card clickable-box" (click)="navigateToMedicineDetails(medicine._id)">
+          <img class="medicine-img rounded-3 mb-3" [src]="medicine.imageUrl" [alt]="medicine.name">
           <h5 class="card-title">{{ medicine.name }}</h5>
           <p class="card-text">{{ medicine.description }}</p>
         </div>
