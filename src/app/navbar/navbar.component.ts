@@ -26,22 +26,6 @@ export class NavbarComponent {
       window.location.reload();
     }
   }
-  navigateToHomeAndScrollToContact(): void {
-    this.router.navigate(['/home']).then(() => {
-      // Wait for the navigation to complete, then scroll to contact section
-      setTimeout(() => {
-        const contactSection = document.getElementById('contactSection');
-        const blogSection=document.getElementById('blogSection');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        if (blogSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100); // Adjust delay as needed
-    });
-  }
-
   confirmLogout(): void {
     const confirmLogout = confirm('Are you sure you want to logout?');
     if (confirmLogout) {
