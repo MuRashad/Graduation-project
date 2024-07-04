@@ -25,6 +25,7 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" routerLink="/chatbot" routerLinkActive="active" (click)="reloadIfActive('/chatbot')">Chatbot</a>
         </li>
+
       </ul>
       <ul class="navbar-nav mb-2 bg-dark">
         <ng-container *ngIf="!isLoggedIn; else loggedInButtons">
