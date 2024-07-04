@@ -10,11 +10,11 @@
   <div class="row justify-content-center">
     <div *ngFor="let category of filteredCategories" class="col-md-4 mb-4">
       <div class="category-item card" (click)="filterByCategory(category)">
-        <div class="image-container">
-          <img [src]="getCategoryImage(category)" alt="{{ category }}" class="category-image">
-        </div>
         <div class="card-label">
           <h5 class="card-title">{{ category }}</h5>
+        </div>
+        <div class="image-container">
+          <img [src]="getCategoryImage(category)" alt="{{ category }}" class="category-image">
         </div>
       </div>
     </div>
