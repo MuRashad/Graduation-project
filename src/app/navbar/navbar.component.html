@@ -25,6 +25,18 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" routerLink="/chatbot" routerLinkActive="active" (click)="reloadIfActive('/chatbot')">Chatbot</a>
         </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <button id="btn" class="nav-link" (click)="scrollToSection($event, 'about')">About US</button>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <button id="btn" class="nav-link" (click)="scrollToSection($event, 'contactSection')">Contact US</button>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <button id="btn" class="nav-link" (click)="scrollToSection($event, 'services')">Services</button>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <button id="btn" class="nav-link" (click)="scrollToSection($event, 'blogSection')">Blogs</button>
+        </li>
 
       </ul>
       <ul class="navbar-nav mb-2 bg-dark">
