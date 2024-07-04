@@ -26,13 +26,13 @@
           <a class="nav-link" routerLink="/chatbot" routerLinkActive="active" (click)="reloadIfActive('/chatbot')">Chatbot</a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav mb-2 bg-dark">
         <ng-container *ngIf="!isLoggedIn; else loggedInButtons">
           <li class="nav-item">
-            <button class="btn btn-outline-light me-2 text-dark" routerLink="/signup" routerLinkActive="active" (click)="reloadIfActive('/signup')">Signup</button>
+            <button class="btn btn-outline-light" routerLink="/signup" routerLinkActive="active">Signup</button>
           </li>
           <li class="nav-item">
-            <button class="btn btn-outline-light" routerLink="/login" routerLinkActive="active" (click)="reloadIfActive('/login')">Login</button>
+            <button class="btn btn-outline-light" routerLink="/login" routerLinkActive="active">Login</button>
           </li>
         </ng-container>
         <ng-template #loggedInButtons>

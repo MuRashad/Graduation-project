@@ -1,24 +1,24 @@
-<!-- src/app/medicine-details/medicine-details.component.html -->
 <div class="container mt-4" *ngIf="medicine">
   <h2>{{ medicine.name }}</h2>
-  <p>{{ medicine.description }}</p>
 
   <div class="card mt-3">
-    <div class="card-body">
-      <h5 class="card-title">Details</h5>
-      <p><strong>Drugbank ID:</strong> {{ medicine.drugbank_id }}</p>
-      <p><strong>CAS Number:</strong> {{ medicine.cas_number }}</p>
-      <p><strong>Updated At:</strong> {{ medicine.updated_at }}</p>
-      <p><strong>Created At:</strong> {{ medicine.created_at }}</p>
-      <p><strong>Groups:</strong> {{ medicine.groups.join(", ") }}</p>
-      <p><strong>Drug Type:</strong> {{ medicine.drug_type }}</p>
-      <p><strong>Synonyms:</strong> {{ medicine.synonyms.join(", ") }}</p>
-      <p>
-        <strong>Food Interactions:</strong>
-        {{ medicine.food_interactions.join(", ") }}
-      </p>
-      <p><strong>Box Shape:</strong> {{ medicine.box_shape }}</p>
-      <p><strong>Box Color:</strong> {{ medicine.box_color }}</p>
+    <div class="row">
+      <div class="col-md-4">
+        <img class="rounded mb-3 img-fluid" [src]="medicine.imageUrl" [alt]="medicine.name">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Medicine Details</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Description:</strong> {{ medicine.description }}</li>
+            <li class="list-group-item"><strong>Drugbank ID:</strong> {{ medicine.drugbank_id }}</li>
+            <li class="list-group-item"><strong>Drug Type:</strong> {{ medicine.drug_type }}</li>
+            <li class="list-group-item"><strong>Synonyms:</strong> {{ medicine.synonyms.join(", ") }}</li>
+            <li class="list-group-item"><strong>Food Interactions:</strong> {{ medicine.food_interactions.join(", ") }}</li>
+            <li class="list-group-item"><strong>Box Color:</strong> {{ medicine.box_color }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

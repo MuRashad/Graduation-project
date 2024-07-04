@@ -1,6 +1,5 @@
-// src/app/medicine-details/medicine-details.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MedicinesService } from '../medicines.service';
 
 @Component({
@@ -9,10 +8,11 @@ import { MedicinesService } from '../medicines.service';
   styleUrls: ['./medicine-details.component.css']
 })
 export class MedicineDetailsComponent implements OnInit {
-  medicine: any;  // Declare the medicine property
+  medicine: any;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private medicinesService: MedicinesService
   ) {}
 
@@ -28,5 +28,11 @@ export class MedicineDetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  navigateBackToList(): void {
+    // Navigate back to medicines list with the correct category
+    const category = this.route.snapshot.queryParams['category'];
+    this.router.navigate(['/medicines'], { queryParams: { category } });
   }
 }

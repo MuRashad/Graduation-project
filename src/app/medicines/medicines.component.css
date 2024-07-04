@@ -1,59 +1,80 @@
-.container {
-  padding: 20px;
-}
-
-.search-container {
-  margin-bottom: 20px;
-}
-
 .category-item {
   text-align: center;
   border: 1px solid #ddd;
-  padding: 20px;
   transition: all 0.3s ease;
   cursor: pointer;
-  margin-bottom: 20px;
-  height: 100px; /* Adjust height as needed */
+  margin-bottom: 10px;
+  height: 260px; /* Set the fixed height for the square card */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .category-item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-5px);
 }
+.search-container {
+  margin-bottom: 30px; /* Adjust margin bottom as needed */
+  margin-top: 30;
+}
 
-.category-item .icon {
-  font-size: 48px; /* Adjust icon size */
-  margin-bottom: 10px;
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.category-image {
+  width: 100%; /* Ensure the image fills the container */
+  height: 100%; /* Ensure the image fills the container */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.card-label {
+  padding: 10px;
+  background-color: #f0f0f0; /* Background color for the label */
+}
+
+.card-title {
+  margin-bottom: 0;
 }
 
 .medicine-item {
-  cursor: pointer;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.card {
-  border: 1px solid #ddd;
-  padding: 15px;
+  text-align: center;
+  padding: 20px;
   transition: all 0.3s ease;
   cursor: pointer;
   margin-bottom: 20px;
-  height: 450px;
-
+  height: 250px; /* Adjust height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
-.card:hover {
+.medicine-item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: translate(-5px);
+  transform: translateY(-5px);
 }
-.medicine-img{
-  object-fit: cover;
-  height: 300px;
+
+.medicine-item .medicine-content {
+  position: relative;
 }
+
+.medicine-item .card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #020202; /* Text color */
+}
+
+.medicine-item .medicine-img {
+  max-width: 100%; /* Ensure image does not exceed container width */
+  max-height: 190px; /* Adjust max height as needed */
+  border-radius: 8px; /* Rounded corners for the image */
+  margin-top: 10px; /* Adjust spacing between label and image */
+
+}
+

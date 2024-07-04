@@ -1,0 +1,37 @@
+/* Custom CSS for Medicine Details Form */
+
+.custom-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.5rem;
+}
+
+.list-group-item {
+  border: none;
+  padding: 0.75rem 1.25rem;
+}
+
+.list-group-item:nth-child(odd) {
+  background-color: #f8f9fa; /* Alternate background color for list items */
+}
+
+.text-primary {
+  color: #007bff; /* Primary color */
+}
+
+.text-info {
+  color: #17a2b8; /* Info color */
+}
+
+.text-muted {
+  color: #6c757d; /* Muted color */
+}

@@ -1,384 +1,187 @@
 <div class="signup-layer">
   <div class="container">
     <div class="container-fluid">
-      <div>
-        <div
-          class="row justify-content-center align-items-start h-100 bg-transparent"
-        >
-          <div class="col-md-6 mt">
-            <div class="signup-text d-flex justify-content-start mt-5 ms-3">
-              <div>
-                <h1 class="text">We take care</h1>
-                <h1 class="text-white">of your health</h1>
-              </div>
+      <div class="row justify-content-center align-items-start h-100 bg-transparent">
+        <div class="col-md-6 mt">
+          <div class="signup-info d-flex flex-column justify-content-start align-items-center mt-5">
+            <div class="signup-text text-white">
+              <h1>We take care</h1>
+              <h1>of your health</h1>
             </div>
-            <div class="signup-info mt-5">
-              <div class="signup-photo">
-                <img
-                  src="../../assets/images/hospital.png"
-                  alt="Hospital Image"
-                />
-              </div>
+            <div class="signup-photo mt-5">
+              <img src="../../assets/images/hospital.png" alt="Hospital Image" />
             </div>
           </div>
-          <div class="col-md-6 h-100">
-            <!-- Selection boxes -->
-            <ng-container *ngIf="selectedForm === null && !userClicked">
-              <div
-                class="glass-card mt-5"
-                (click)="chooseForm('user'); userClicked = true"
-              >
-                <div
-                  class="card-body d-flex align-items-center justify-content-center row bg-transparent"
-                >
-                  <div class="col-3 text-center">
-                    <i class="fas fa-user fa-3x"></i>
-                    <!-- User icon -->
-                  </div>
-                  <div class="col-9">
-                    <h5 class="card-title">User</h5>
-                    <p class="card-text">Click here to register as a user</p>
-                  </div>
+        </div>
+        <div class="col-md-6 h-100">
+          <!-- Selection boxes -->
+          <ng-container *ngIf="selectedForm === null">
+            <div class="card clickable-box mt-5" (click)="chooseForm('user')">
+              <div class="card-body d-flex align-items-center justify-content-center">
+                <i class="fas fa-user fa-3x me-3"></i>
+                <div>
+                  <h5 class="card-title">User</h5>
+                  <p class="card-text">Click here to register as a user</p>
                 </div>
               </div>
-            </ng-container>
-
-            <ng-container *ngIf="selectedForm === null && !pharmacyClicked">
-              <div
-                class="glass-card mt-2"
-                (click)="chooseForm('pharmacy'); pharmacyClicked = true"
-              >
-                <div
-                  class="card-body d-flex align-items-center justify-content-center row bg-transparent"
-                >
-                  <div class="col-3 text-center">
-                    <i class="fas fa-hospital fa-3x me-3"></i>
-                    <!-- Pharmacy icon -->
-                  </div>
-
-                  <div class="col-9">
-                    <h5 class="card-title">Pharmacy</h5>
-                    <p class="card-text">
-                      Click here to register as a pharmacy
-                    </p>
-                  </div>
+            </div>
+            <div class="card clickable-box mt-2" (click)="chooseForm('pharmacy')">
+              <div class="card-body d-flex align-items-center justify-content-center">
+                <i class="fas fa-hospital fa-3x me-3"></i>
+                <div>
+                  <h5 class="card-title">Pharmacy</h5>
+                  <p class="card-text">Click here to register as a pharmacy</p>
                 </div>
               </div>
-            </ng-container>
-          </div>
-
+            </div>
+          </ng-container>
           <!-- Registration form -->
-          <div
-            class="col-md-6 mt-2"
-            *ngIf="selectedForm === 'user' || selectedForm === 'pharmacy'"
-          >
-            <div
-              class="w-75 p-4 mx-auto form-design p-3 border-1 rounded-start-5 py-5 form-transition"
-            >
-              <form
-                (ngSubmit)="handleRegister()"
-                [formGroup]="selectedForm === 'user' ? userForm : pharmacyForm"
-              >
+          <div class="form-design mt-5" *ngIf="selectedForm === 'user' || selectedForm === 'pharmacy'">
+            <div class="w-75 p-4 mx-auto p-3 rounded-start-5 py-5 form-transition">
+              <form (ngSubmit)="handleRegister()" [formGroup]="selectedForm === 'user' ? userForm : pharmacyForm">
                 <div class="alert alert-danger" *ngIf="apiError.length > 0">
                   {{ apiError }}
                 </div>
-                <h3 class="text-center text-white">
+                <h3 class="text-white text-start">
                   {{
-                    selectedForm === "user"
-                      ? "User Registration"
-                      : "Pharmacy Registration"
+                  selectedForm === "user"
+                  ? "User Registration"
+                  : "Pharmacy Registration"
                   }}
                 </h3>
 
-                <!-- User registration fields -->
-                <ng-container *ngIf="selectedForm === 'user'">
-                  <label for="username">Username:</label>
-                  <input
-                    formControlName="username"
-                    class="form-control mb-2"
-                    type="text"
-                    placeholder="Enter username"
-                    id="username"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      userForm.get('username')?.errors &&
-                      userForm.get('username')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="userForm.get('username')?.errors?.['minlength']"
-                      class="m-0"
-                    >
-                      *Min length must be 3
-                    </p>
-                    <p
-                      *ngIf="userForm.get('username')?.errors?.['maxlength']"
-                      class="m-0"
-                    >
-                      *Max length is 20
-                    </p>
-                    <p
-                      *ngIf="userForm.get('username')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *Username is required
-                    </p>
-                  </div>
-                  <label for="name">Name:</label>
-                  <input
-                    formControlName="name"
-                    class="form-control mb-1"
-                    type="text"
-                    placeholder="Full Name"
-                    id="name"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      userForm.get('name')?.errors &&
-                      userForm.get('name')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="userForm.get('name')?.errors?.['minlength']"
-                      class="m-0"
-                    >
-                      *min length must be 3
-                    </p>
-                    <p
-                      *ngIf="userForm.get('name')?.errors?.['maxlength']"
-                      class="m-0"
-                    >
-                      *max length is 50
-                    </p>
-                    <p
-                      *ngIf="userForm.get('name')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *name is required
-                    </p>
-                  </div>
-                  <label for="email">Email:</label>
-                  <input
-                    formControlName="email"
-                    class="form-control mb-2"
-                    type="email"
-                    placeholder="Enter email"
-                    id="email"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      userForm.get('email')?.errors &&
-                      userForm.get('email')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="userForm.get('email')?.errors?.['email']"
-                      class="m-0"
-                    >
-                      *Invalid email format
-                    </p>
-                    <p
-                      *ngIf="userForm.get('email')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *Email is required
-                    </p>
-                  </div>
-                  <label for="password">Password:</label>
-                  <input
-                    formControlName="password"
-                    class="form-control mb-2"
-                    type="password"
-                    placeholder="password"
-                    id="password"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      userForm.get('password')?.errors &&
-                      userForm.get('password')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="userForm.get('password')?.errors?.['pattern']"
-                      class="m-0"
-                    >
-                      *Password must start with two letters and be at least 8
-                      characters or numbers
-                    </p>
-                    <p
-                      *ngIf="userForm.get('password')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *Password is required
-                    </p>
-                  </div>
-                  <button
-                    [disabled]="userForm.invalid"
-                    class="btn btn-secondary mt-2"
-                    type="submit"
-                  >
-                    <i
-                      *ngIf="isLoading"
-                      class="fa-solid fa-spinner fa-spin-pulse"
-                    ></i>
-                    <span *ngIf="!isLoading">Submit</span>
-                  </button>
-                </ng-container>
+                <!-- User/Pharmacy registration fields -->
+                <div class="container-fluid" style="color: white;">
+                  <div class="row justify-content-center mt-5">
+                    <ng-container *ngIf="selectedForm === 'user'">
+                      <label for="username">Username:</label>
+                      <input formControlName="username" class="form-control mb-2" type="text"
+                        placeholder="Enter username" id="username" />
+                      <div class="alert alert-danger p-1 mb-0"
+                        *ngIf="userForm.get('username')?.errors &&userForm.get('username')?.touched">
+                        <p *ngIf="userForm.get('username')?.errors?.['minlength']" class="m-0">
+                          *Min length must be 3
+                        </p>
+                        <p *ngIf="userForm.get('username')?.errors?.['maxlength']" class="m-0">
+                          *Max length is 20
+                        </p>
+                        <p *ngIf="userForm.get('username')?.errors?.['required']" class="m-0">
+                          *Username is required
+                        </p>
+                      </div>
+                      <label for="name">Name:</label>
+                      <input formControlName="name" class="form-control mb-1" type="text" placeholder="Full Name"
+                        id="name" />
+                      <div class="alert alert-danger p-1 mb-0" *ngIf="
+                    userForm.get('name')?.errors &&
+                    userForm.get('name')?.touched
+                  ">
+                        <p *ngIf="userForm.get('name')?.errors?.['minlength']" class="m-0">
+                          *min length must be 3
+                        </p>
+                        <p *ngIf="userForm.get('name')?.errors?.['maxlength']" class="m-0">
+                          *max length is 50
+                        </p>
+                        <p *ngIf="userForm.get('name')?.errors?.['required']" class="m-0">
+                          *name is required
+                        </p>
+                      </div>
+                      <label for="email">Email:</label>
+                      <input formControlName="email" class="form-control mb-2" type="email" placeholder="Enter email"
+                        id="email" />
+                      <div class="alert alert-danger p-1 mb-0" *ngIf="
+                    userForm.get('email')?.errors &&
+                    userForm.get('email')?.touched
+                  ">
+                        <p *ngIf="userForm.get('email')?.errors?.['email']" class="m-0">
+                          *Invalid email format
+                        </p>
+                        <p *ngIf="userForm.get('email')?.errors?.['required']" class="m-0">
+                          *Email is required
+                        </p>
+                      </div>
+                      <label for="password">Password:</label>
+                      <input formControlName="password" class="form-control mb-2" type="password"
+                        placeholder="password" id="password" />
+                      <div class="alert alert-danger p-1 mb-0" *ngIf="
+                    userForm.get('password')?.errors &&
+                    userForm.get('password')?.touched
+                  ">
+                        <p *ngIf="userForm.get('password')?.errors?.['pattern']" class="m-0">
+                          *Password must start with two letters and be at least 8
+                          characters or numbers
+                        </p>
+                        <p *ngIf="userForm.get('password')?.errors?.['required']" class="m-0">
+                          *Password is required
+                        </p>
+                      </div>
+                      <button [disabled]="userForm.invalid" class="btn btn-secondary mt-2" type="submit">
+                        <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin-pulse"></i>
+                        <span *ngIf="!isLoading">Submit</span>
+                      </button>
+                    </ng-container>
 
-                <!-- Pharmacy registration fields -->
-                <ng-container *ngIf="selectedForm === 'pharmacy'">
-                  <label for="pharmacy_username">Pharmacist:</label>
-                  <input
-                    formControlName="pharmacy_username"
-                    class="form-control mb-2"
-                    type="text"
-                    placeholder="First name and last name"
-                    id="pharmacy_username"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      pharmacyForm.get('pharmacy_username')?.errors &&
-                      pharmacyForm.get('pharmacy_username')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_username')?.errors?.['minlength']"
-                      class="m-0"
-                    >
-                      *Min length must be 3
-                    </p>
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_username')?.errors?.['maxlength']"
-                      class="m-0"
-                    >
-                      *Max length is 20
-                    </p>
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_username')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *Name is required
-                    </p>
-                  </div>
+                    <!-- Pharmacy registration fields -->
+                    <ng-container *ngIf="selectedForm === 'pharmacy'">
+                      <label for="pharmacy_username">Pharmacist:</label>
+                      <input formControlName="pharmacy_username" class="form-control mb-2" type="text"
+                        placeholder="First name and last name" id="pharmacy_username" />
+                      <div class="alert alert-danger p-1 mb-0" *ngIf="
+                    pharmacyForm.get('pharmacy_username')?.errors &&
+                    pharmacyForm.get('pharmacy_username')?.touched
+                  ">
+                        <p *ngIf="pharmacyForm.get('pharmacy_username')?.errors?.['minlength']" class="m-0">
+                          *Min length must be 3
+                        </p>
+                        <p *ngIf="pharmacyForm.get('pharmacy_username')?.errors?.['maxlength']" class="m-0">
+                          *Max length is 20
+                        </p>
+                        <p *ngIf="pharmacyForm.get('pharmacy_username')?.errors?.['required']" class="m-0">
+                          *Name is required
+                        </p>
+                      </div>
 
-                  <label for="pharmacy_name">Pharmacy Name:</label>
-                  <input
-                    formControlName="pharmacy_name"
-                    class="form-control mb-2"
-                    type="text"
-                    placeholder="Pharmacy Name"
-                    id="pharmacy_name"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      pharmacyForm.get('pharmacy_name')?.errors &&
-                      pharmacyForm.get('pharmacy_name')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_name')?.errors?.['minlength']"
-                      class="m-0"
-                    >
-                      *Min length must be 3
-                    </p>
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_name')?.errors?.['maxlength']"
-                      class="m-0"
-                    >
-                      *Max length is 20
-                    </p>
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_name')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *Pharmacy name is required
-                    </p>
-                  </div>
+                      <label for="pharmacy_name">Pharmacy Name:</label>
+                      <input formControlName="pharmacy_name" class="form-control mb-2" type="text"
+                        placeholder="Pharmacy Name" id="pharmacy_name" />
+                      <div class="alert alert-danger p-1 mb-0" *ngIf="
+                    pharmacyForm.get('pharmacy_name')?.errors &&
+                    pharmacyForm.get('pharmacy_name')?.touched
+                  ">
+                        <p *ngIf="pharmacyForm.get('pharmacy_name')?.errors?.['minlength']" class="m-0">
+                          *Min length must be 3
+                        </p>
+                        <p *ngIf="pharmacyForm.get('pharmacy_name')?.errors?.['maxlength']" class="m-0">
+                          *Max length is 20
+                        </p>
+                        <p *ngIf="pharmacyForm.get('pharmacy_name')?.errors?.['required']" class="m-0">
+                          *Pharmacy name is required
+                        </p>
+                      </div>
 
-                  <label for="pharmacy_password">Password:</label>
-                  <input
-                    formControlName="pharmacy_password"
-                    class="form-control mb-2"
-                    type="password"
-                    placeholder="Password"
-                    id="pharmacy_password"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      pharmacyForm.get('pharmacy_password')?.errors &&
-                      pharmacyForm.get('pharmacy_password')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_password')?.errors?.['pattern']"
-                      class="m-0"
-                    >
-                      *Password must start with two letters and be at least 8
-                      characters or numbers
-                    </p>
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_password')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *Password is required
-                    </p>
-                  </div>
+                      <label for="pharmacy_password">Password:</label>
+                      <input formControlName="pharmacy_password" class="form-control mb-2" type="password"
+                        placeholder="Password" id="pharmacy_password" />
+                      <div class="alert alert-danger p-1 mb-0" *ngIf="
+                    pharmacyForm.get('pharmacy_password')?.errors &&
+                    pharmacyForm.get('pharmacy_password')?.touched
+                  ">
+                        <p *ngIf="pharmacyForm.get('pharmacy_password')?.errors?.['pattern']" class="m-0">
+                          *Password must start with two letters and be at least 8
+                          characters or numbers
+                        </p>
+                        <p *ngIf="pharmacyForm.get('pharmacy_password')?.errors?.['required']" class="m-0">
+                          *Password is required
+                        </p>
+                      </div>
 
-                  <label for="pharmacy_address">Pharmacy Address:</label>
-                  <input
-                    formControlName="pharmacy_address"
-                    class="form-control mb-2"
-                    type="text"
-                    placeholder="Pharmacy Address"
-                    id="pharmacy_address"
-                  />
-                  <div
-                    class="alert alert-danger p-1 mb-0"
-                    *ngIf="
-                      pharmacyForm.get('pharmacy_address')?.errors &&
-                      pharmacyForm.get('pharmacy_address')?.touched
-                    "
-                  >
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_address')?.errors?.['minlength']"
-                      class="m-0"
-                    >
-                      *Min length must be 3
-                    </p>
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_address')?.errors?.['maxlength']"
-                      class="m-0"
-                    >
-                      *Max length is 20
-                    </p>
-                    <p
-                      *ngIf="pharmacyForm.get('pharmacy_address')?.errors?.['required']"
-                      class="m-0"
-                    >
-                      *Address is required
-                    </p>
+                      <button [disabled]="pharmacyForm.invalid" class="btn btn-secondary mt-2" type="submit">
+                        <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin-pulse"></i>
+                        <span *ngIf="!isLoading">Submit</span>
+                      </button>
+                    </ng-container>
                   </div>
-
-                  <button
-                    [disabled]="pharmacyForm.invalid"
-                    class="btn btn-secondary mt-2"
-                    type="submit"
-                  >
-                    <i
-                      *ngIf="isLoading"
-                      class="fa-solid fa-spinner fa-spin-pulse"
-                    ></i>
-                    <span *ngIf="!isLoading">Submit</span>
-                  </button>
-                </ng-container>
+                </div>
               </form>
             </div>
           </div>

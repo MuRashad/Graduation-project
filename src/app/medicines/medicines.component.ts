@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MedicinesService } from '../medicines.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-medicines',
@@ -10,29 +9,17 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./medicines.component.css']
 })
 export class MedicinesComponent implements OnInit {
-  medicineForm: FormGroup;
   medicines: any[] = [];
   filteredMedicines: any[] = [];
-  categories: string[] = [];
   filteredCategories: string[] = [];
   selectedCategory: string | null = null;
   searchControl: FormControl = new FormControl('');
 
   constructor(
     private medicinesService: MedicinesService,
-    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    this.medicineForm = new FormGroup({
-      drugbank_id: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
-      description: new FormControl(''),
-      updated_at: new FormControl(new Date().toISOString()),
-      created_at: new FormControl(new Date().toISOString()),
-      // Add more form controls based on your medicine structure
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getMedicines();
@@ -44,11 +31,11 @@ export class MedicinesComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const category = params['category'];
       if (category) {
-        this.filterByCategory(decodeURIComponent(category));
+        this.filterByCategory(category);
       } else {
         this.selectedCategory = null;
         this.filteredMedicines = [...this.medicines];
-        this.filteredCategories = [...this.categories];
+        this.filteredCategories = this.extractCategories();
       }
     });
   }
@@ -57,9 +44,7 @@ export class MedicinesComponent implements OnInit {
     this.medicinesService.getMedicines().subscribe({
       next: (data: any[]) => {
         this.medicines = data;
-        this.filteredMedicines = data;
-        this.extractCategories(data);
-        this.filteredCategories = [...this.categories];
+        this.filterResults(null); // Apply initial filters based on selected category or search
       },
       error: (err: any) => {
         console.error('Error fetching medicines:', err);
@@ -71,31 +56,29 @@ export class MedicinesComponent implements OnInit {
     if (this.selectedCategory) {
       this.filterMedicines(query);
     } else {
-      this.filterCategories(query);
+      this.filteredMedicines = this.medicines.filter(medicine =>
+        medicine.name.toLowerCase().includes(query?.toLowerCase() || '')
+      );
+      this.filteredCategories = this.extractCategories();
     }
   }
 
   filterMedicines(query: string | null): void {
-    if (query) {
-      this.filteredMedicines = this.medicines.filter(medicine =>
-        medicine.name.toLowerCase().includes(query.toLowerCase()) &&
-        medicine.category === this.selectedCategory
-      );
-    } else {
-      this.filteredMedicines = this.medicines.filter(medicine =>
-        medicine.category === this.selectedCategory
-      );
-    }
+    this.filteredMedicines = this.medicines.filter(medicine =>
+      medicine.name.toLowerCase().includes(query?.toLowerCase() || '') &&
+      medicine.category === this.selectedCategory
+    );
+    this.filteredCategories = [];
   }
 
-  filterCategories(query: string | null): void {
-    if (query) {
-      this.filteredCategories = this.categories.filter(category =>
-        category.toLowerCase().includes(query.toLowerCase())
-      );
-    } else {
-      this.filteredCategories = [...this.categories]; // Reset to show all categories
-    }
+  extractCategories(): string[] {
+    const categorySet = new Set<string>();
+    this.medicines.forEach(medicine => {
+      if (medicine.category) {
+        categorySet.add(medicine.category);
+      }
+    });
+    return Array.from(categorySet);
   }
 
   filterByCategory(category: string): void {
@@ -103,23 +86,13 @@ export class MedicinesComponent implements OnInit {
       this.selectedCategory = category;
       this.filterMedicines(null); // Reset the medicine filter with the selected category
       // Update the query params to reflect the selected category
-      this.router.navigate([], { queryParams: { category } });
+      this.router.navigate(['/medicines'], { queryParams: { category } });
     } else {
       this.selectedCategory = null;
       this.filteredMedicines = [...this.medicines]; // Reset to show all medicines
-      this.filteredCategories = [...this.categories];
-      this.router.navigate([], { queryParams: {} });
+      this.filteredCategories = this.extractCategories();
+      this.router.navigate(['/medicines']);
     }
-  }
-
-  private extractCategories(medicines: any[]): void {
-    const categorySet = new Set<string>();
-    medicines.forEach(medicine => {
-      if (medicine.category) {
-        categorySet.add(medicine.category);
-      }
-    });
-    this.categories = Array.from(categorySet);
   }
 
   navigateToMedicineDetails(medicineId: string): void {
@@ -127,15 +100,24 @@ export class MedicinesComponent implements OnInit {
     this.router.navigate(['/medicine', medicineId], { queryParams: { category: this.selectedCategory } });
   }
 
-  getCategoryIconColor(category: string): string {
-    // Example: Add custom colors for each category
-    const categoryColors: { [key: string]: string } = {
-      'Pain Relief': '#ff6347',
-      'Antibiotics': '#8a2be2',
-      'Vitamins': '#ff7f50',
-      // Add more categories and colors as needed
+  categories: string[] = ['Pain relief', 'Antibiotics', 'Mental health', 'Cholesterol', 'Diabetes', 'Hypertension', 'Endocrine', 'Gastrointestinal', 'Hematologic', 'Psychiatric', 'lmmunosuppressant'];
+  getCategoryImage(category: string): string {
+    // Define image paths for each category
+    const categoryImages: { [key: string]: string } = {
+      'Pain relief': 'assets/images/happy-young-mom-holds-precious-little-child-gently-hugging-his-little-body-kid-laughing-joyfully-looking-camera-with-big-grey-eyes.jpg',
+      'Antibiotics': 'assets/images/4300944_18187.jpg',
+      'Mental health': 'assets/images/beauty-portrait-ginger-woman-with-long-hair-posing-with-green-leaf.jpg',
+      'Cholesterol': 'assets/images/closeup-shot-fresh-fruits-with-different-medicine-wooden-spoon.jpg',
+      'Diabetes': 'assets/images/packings-pills-capsules-medicines.jpg',
+      'Hypertension': 'assets/images/doctor-taking-care-senior-woman-home.jpg',
+      'Endocrine': 'assets/images/flat-lay-minimal-medicinal-pills-assortment.jpg',
+      'Gastrointestinal': 'assets/images/arrangement-medical-objects-with-empty-frame.jpg',
+      'Cardiovascular': 'assets/images/pleased-young-female-ginger-doctor-wearing-medical-robe-stethoscope-showing-pack-medical-pills-pointing-side-isolated-purple-wall.jpg',
+      'Hematologic': 'assets/images/pills 3.png',
+      'Psychiatric': 'assets/images/girl-touches-moisturized-skin-smiles-portrait-model-with-cream-face-isolated-wall.jpg',
+      'Immunosuppressant': 'assets/images/close-up-clipboard-with-pills.jpg',
     };
 
-    return categoryColors[category] || '#007bff'; // Default color if category not found
+    return categoryImages[category] || 'assets/images/default.png'; // Default image if category not found
   }
 }
