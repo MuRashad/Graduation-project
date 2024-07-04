@@ -29,10 +29,10 @@
       <ul class="navbar-nav mb-2 bg-dark">
         <ng-container *ngIf="!isLoggedIn; else loggedInButtons">
           <li class="nav-item">
-            <button class="btn btn-outline-light" routerLink="/signup" routerLinkActive="active">Signup</button>
+            <button class="btn btn-outline-light" routerLink="/signup" routerLinkActive="active" (click)="reloadIfActive('/signup')">Signup</button>
           </li>
           <li class="nav-item">
-            <button class="btn btn-outline-light" routerLink="/login" routerLinkActive="active">Login</button>
+            <button class="btn btn-outline-light" routerLink="/login" routerLinkActive="active" (click)="reloadIfActive('/login')">Login</button>
           </li>
         </ng-container>
         <ng-template #loggedInButtons>

@@ -15,13 +15,15 @@
 
 .form-design {
   background-color: rgba(0, 0, 0, 0.559);
-  box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.5); /* Removed spread radius */
-  margin-top: -500px;
+  box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
+  margin-top: -670px;
   padding: 20px;
-  border-radius: 3; /* Sharp borders */
-  border: 2px solid rgb(255, 255, 255); /* White border */
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 0; /* No rounded corners */
+  position: relative; /* Added position relative */
+  left: 700px; /* Adjusted left positioning */
+  width: 500px; /* Adjusted width */
 }
-
 
 .clickable-box {
   background-color: #ffffff;
@@ -54,14 +56,12 @@
 .card-body {
   display: flex;
   align-items: center;
-
   justify-content: center;
 }
 
 .fa-user,
 .fa-hospital {
   color: #007bff;
-
 }
 
 .fa-3x {
