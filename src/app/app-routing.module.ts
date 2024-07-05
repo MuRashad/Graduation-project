@@ -10,7 +10,7 @@ import { MedicinesComponent } from './medicines/medicines.component';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { CanActivateFn } from '@angular/router';
 import { authGuardGuard } from './auth-guard.guard';
-//#region
+//#regio
 
 const routes: Routes = [
   { path: "", redirectTo: "signup", pathMatch: "full" },
