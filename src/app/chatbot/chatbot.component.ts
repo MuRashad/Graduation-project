@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChatResponseService } from '../chat-response.service';
@@ -31,7 +32,6 @@ export class ChatbotComponent {
   }
 
   closeAllMenus(event: Event) {
-    // Close all menus when clicking outside the dropdown
     this.chatHistory.forEach(chat => chat.showMenu = false);
     event.stopPropagation(); // Prevent unnecessary propagation
   }
@@ -39,6 +39,7 @@ export class ChatbotComponent {
   sendMessage() {
     const userMessage = this.chatForm.get('message')?.value;
     this.chatService.getChatResponse(userMessage).subscribe({
+      //sadas
       next: (x) => {
         const newMessage: ChatMessage = { message: userMessage, response: x.response };
         this.messages.push(newMessage);

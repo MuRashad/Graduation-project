@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
   }
 
   scrollToSection(event: Event, sectionId: string): void {
-    event.preventDefault(); // Prevent default action (e.g., navigation)
+    event.preventDefault();
 
     if (this.router.url !== '/home') {
       this.router.navigate(['/home']).then(() => {

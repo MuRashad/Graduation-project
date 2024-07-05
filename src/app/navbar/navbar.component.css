@@ -14,7 +14,6 @@
 
 }
 .navbar-nav .nav-link.active {
-  /* background-color: rgb(11, 110, 113);  */
   border-radius: 5px;
   border-bottom: solid 3px rgb(59, 141, 130);
   border-left: solid 3px rgb(59, 141, 130);
