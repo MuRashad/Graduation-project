@@ -11,8 +11,7 @@ export class HomeComponent {
   ngOnInit(): void {}
 
   scrollToContact(event: Event): void {
-    event.preventDefault(); // Prevent default action (e.g., navigation)
-
+    event.preventDefault();
     const contactSection = document.getElementById('contactSection');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
