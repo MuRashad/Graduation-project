@@ -38,9 +38,6 @@ export class ChatbotComponent {
 
   sendMessage() {
     const userMessage = this.chatForm.get('message')?.value;
-    if (!this.currentChat) {
-      this.startNewChat();
-    }
     this.chatService.getChatResponse(userMessage).subscribe({
       next: (x) => {
         const newMessage: ChatMessage = { message: userMessage, response: x.response };
